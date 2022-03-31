@@ -16,17 +16,18 @@ CURRENT_VERSION=`git describe --abbrev=0 --tags 2>/dev/null`
 
 if [[ $CURRENT_VERSION == '' ]]
 then
-  CURRENT_VERSION='v1.1.0'
+  CURRENT_VERSION='1.0-SNAPSHOT'
 fi
 echo "Current Version: $CURRENT_VERSION"
 
+# replace - with space so can split into an array
+CURRENT_VERSION_SPLIT=(${CURRENT_VERSION//-/ })
 # replace . with space so can split into an array
-CURRENT_VERSION_PARTS=(${CURRENT_VERSION//./ })
+CURRENT_VERSION_PARTS=(${CURRENT_VERSION_SPLIT[0]//./ })
 
 # get number parts
 VNUM1=${CURRENT_VERSION_PARTS[0]}
 VNUM2=${CURRENT_VERSION_PARTS[1]}
-VNUM3=${CURRENT_VERSION_PARTS[2]}
 
 if [[ $VERSION == 'major' ]]
 then
@@ -34,16 +35,13 @@ then
 elif [[ $VERSION == 'minor' ]]
 then
   VNUM2=$((VNUM2+1))
-elif [[ $VERSION == 'patch' ]]
-then
-  VNUM3=$((VNUM3+1))
 else
   echo "No version type (https://semver.org/) or incorrect type specified, try: -v [major, minor, patch]"
   exit 1
 fi
 
 # create new tag
-NEW_TAG="$VNUM1.$VNUM2.$VNUM3"
+NEW_TAG="$VNUM1.$VNUM2-${CURRENT_VERSION_SPLIT[1]}"
 echo "($VERSION) updating $CURRENT_VERSION to $NEW_TAG"
 
 # get current hash and see if it already has a tag
