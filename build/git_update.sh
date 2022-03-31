@@ -18,6 +18,7 @@ if [[ $CURRENT_VERSION == '' ]]
 then
   CURRENT_VERSION='1.0-SNAPSHOT'
 fi
+CURRENT_VERSION='1.2-SNAPSHOT'
 echo "Current Version: $CURRENT_VERSION"
 
 # replace - with space so can split into an array
