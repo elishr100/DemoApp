@@ -29,7 +29,7 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action/composite@v1
       if: always()
       with:
-        files: "test-results/**/*.xml"
+        files: "test/**/*"
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
