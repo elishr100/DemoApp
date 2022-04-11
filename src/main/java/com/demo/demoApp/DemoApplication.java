@@ -15,7 +15,7 @@ public class DemoApplication {
 	@ResponseStatus(value = HttpStatus.OK)
     public String index() {
 		System.out.println("running demoApp application...");
-        return "Hello from Demo application to Yael";
+        return "Hello from Demo application";
     }
 
 	public static void main(String[] args) {

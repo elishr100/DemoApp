@@ -12,7 +12,7 @@ class DemoApplicationTests {
 	@Test
 	void testString() {
 		DemoApplication demoApp = new DemoApplication();
-		assertEquals("Hello from Demo application to Yael", demoApp.index());
+		assertEquals("Hello from Demo application", demoApp.index());
 
 	}
 

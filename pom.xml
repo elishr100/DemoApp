@@ -30,7 +30,8 @@
 
  </dependencies>
 
-	<build>
+
+	 <build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
