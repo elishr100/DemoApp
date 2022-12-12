@@ -16,7 +16,7 @@ public class DemoController {
     @Autowired
     private RestTemplate rest;
 	
-	@GetMapping("/")
+	@GetMapping("/app1")
 	@ResponseStatus(value = HttpStatus.OK)
     public String index() {
 		String message = "Hello From APP1 !!! ";
@@ -30,6 +30,20 @@ public class DemoController {
 		String app2_msg = rest.getForObject("http://app2.eli-demo.com/app2", String.class);
 
         return message + "       \n" + app2_msg;
+    }
+
+    @GetMapping("/")
+	@ResponseStatus(value = HttpStatus.OK)
+    public String index2() {
+		String message = "Hello From APP1 !!! ";
+		try {
+			InetAddress ip = InetAddress.getLocalHost();
+			message += " From host: " + ip;
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+
+        return message;
     }
     
 }

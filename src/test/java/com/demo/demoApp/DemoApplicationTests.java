@@ -25,7 +25,7 @@ class DemoApplicationTests {
 		}
 
 		DemoController demoApp = new DemoController();
-		assertEquals(message, demoApp.index());
+		assertEquals(message, demoApp.index2());
 
 	}
 
