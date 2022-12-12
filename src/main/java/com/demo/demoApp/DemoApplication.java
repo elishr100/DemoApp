@@ -3,17 +3,23 @@ package com.demo.demoApp;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @RestController
 public class DemoApplication {
 
+	@Autowired
+    private RestTemplate rest;
+	
 	@GetMapping("/")
 	@ResponseStatus(value = HttpStatus.OK)
     public String index() {
@@ -24,12 +30,21 @@ public class DemoApplication {
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
-				
-        return message;
+		
+		String app2_msg = rest.getForObject("http://app2.eli-demo.com/app2", String.class);
+
+        return message + "       \n" + app2_msg;
     }
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
+
+	@Bean
+    public RestTemplate restTemplateBean(){
+
+        return new RestTemplate();
+
+    }
 
 }
