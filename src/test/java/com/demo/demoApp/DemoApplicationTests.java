@@ -8,6 +8,8 @@ import java.net.UnknownHostException;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.demo.demoApp.controllers.DemoController;
+
 @SpringBootTest
 class DemoApplicationTests {
 
@@ -22,7 +24,7 @@ class DemoApplicationTests {
 			e.printStackTrace();
 		}
 
-		DemoApplication demoApp = new DemoApplication();
+		DemoController demoApp = new DemoController();
 		assertEquals(message, demoApp.index());
 
 	}
