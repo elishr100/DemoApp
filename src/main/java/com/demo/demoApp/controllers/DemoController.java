@@ -27,7 +27,7 @@ public class DemoController {
 			e.printStackTrace();
 		}
 		
-		String app2_msg = rest.getForObject("http://app2.eli-demo.com/app2", String.class);
+		String app2_msg = rest.getForObject("http://app2.autoSummary/app2", String.class);
         //String app2_msg = "test";
 
         return message + "       \n" + app2_msg;
