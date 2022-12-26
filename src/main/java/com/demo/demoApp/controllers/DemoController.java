@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import org.xbill.DNS.Lookup;
+import org.xbill.DNS.Record;
+import org.xbill.DNS.SRVRecord;
+import org.xbill.DNS.TextParseException;
+import org.xbill.DNS.Type;
+
 @RestController
 public class DemoController {
 
@@ -20,6 +26,7 @@ public class DemoController {
 	@ResponseStatus(value = HttpStatus.OK)
     public String index() {
 		String message = "Hello From APP1 !!! ";
+        String hostname="";
 		try {
 			InetAddress ip = InetAddress.getLocalHost();
 			message += " From host: " + ip;
@@ -27,10 +34,26 @@ public class DemoController {
 			e.printStackTrace();
 		}
 		
-		String app2_msg = rest.getForObject("http://app2.autoSummary:8080/app2", String.class);
+        try {
+            Record[] records = new Lookup("app2.autoSummary", Type.SRV).run();
+
+            for (Record record : records) {
+                 SRVRecord srv = (SRVRecord) record;
+
+            String target = srv.getTarget().toString().replaceFirst("\\.$", "");
+            int port = srv.getPort();
+
+            hostname = target + ":" + port;
+            System.out.println(hostname);
+          }
+          } catch (TextParseException e) {
+             e.printStackTrace();
+          }
+
+		String app2_msg = rest.getForObject("http://" + hostname + "/app2", String.class);
         //String app2_msg = "test";
 
-        return message + "       \n" + app2_msg;
+        return message + "                                             " + app2_msg;
     }
 
     @GetMapping("/")
