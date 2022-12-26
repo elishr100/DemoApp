@@ -49,6 +49,7 @@ public class DemoController {
              e.printStackTrace();
           }
 
+        hostname = "http://566fa43a634c427aa3ad1998c4646028.app2.autosummary:49155/app2";  
 		String app2_msg = rest.getForObject(hostname, String.class);
         //String app2_msg = "test";
 
