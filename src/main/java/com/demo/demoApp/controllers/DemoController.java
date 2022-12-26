@@ -44,16 +44,15 @@ public class DemoController {
             int port = srv.getPort();
 
             hostname = target + ":" + port;
-            System.out.println(hostname);
           }
           } catch (TextParseException e) {
              e.printStackTrace();
           }
 
-		String app2_msg = rest.getForObject("http://" + hostname + "/app2", String.class);
+		//String app2_msg = rest.getForObject("http://" + hostname + "/app2", String.class);
         //String app2_msg = "test";
 
-        return message + "                                             " + app2_msg;
+        return message + "                                             >>>>" + hostname;
     }
 
     @GetMapping("/")
