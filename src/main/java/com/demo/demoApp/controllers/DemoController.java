@@ -50,7 +50,7 @@ public class DemoController {
           }
 
         hostname = "http://566fa43a634c427aa3ad1998c4646028.app2.autosummary:49155/app2";  
-		String app2_msg = rest.getForObject(hostname, String.class);
+		String app2_msg = rest.getForObject("http://d84a6c0ba3684e4cad45dbdfeefd2355.app2.autosummary:49153/app2", String.class);
         //String app2_msg = "test";
 
         return message + "                                             >>>>     " + app2_msg;
