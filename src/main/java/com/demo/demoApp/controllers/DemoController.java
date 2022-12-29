@@ -45,6 +45,7 @@ public class DemoController {
             throw new AmazonClientException("Cannot Load Credentials");
         }
         
+        
         AWSServiceDiscovery client = AWSServiceDiscoveryClientBuilder
             .standard()
             .withCredentials(new AWSStaticCredentialsProvider(credentials))
