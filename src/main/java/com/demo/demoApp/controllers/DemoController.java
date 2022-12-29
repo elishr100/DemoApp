@@ -39,6 +39,7 @@ public class DemoController {
 		}
 		
         AWSCredentials credentials =null;
+        
         try {
             credentials= new EnvironmentVariableCredentialsProvider().getCredentials();
         }catch (Exception e) {
