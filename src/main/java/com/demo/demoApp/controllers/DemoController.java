@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.auth.EnvironmentVariableCredentialsProvider;
 import com.amazonaws.services.servicediscovery.AWSServiceDiscovery;
 import com.amazonaws.services.servicediscovery.AWSServiceDiscoveryClientBuilder;
@@ -38,17 +39,12 @@ public class DemoController {
 			e.printStackTrace();
 		}
 		
-        AWSCredentials credentials =null;
-        try {
-            credentials= new EnvironmentVariableCredentialsProvider().getCredentials();
-        }catch (Exception e) {
-            throw new AmazonClientException("Cannot Load Credentials");
-        }
-        
+        BasicAWSCredentials credentials = new BasicAWSCredentials("AKIAVRTVBZE5AOH6BPPH", "AtQ/U2sU16mB/jUgUt1JN9OL8exj2AEsFHFQ7ds3");
+     
         AWSServiceDiscovery client = AWSServiceDiscoveryClientBuilder
             .standard()
             .withCredentials(new AWSStaticCredentialsProvider(credentials))
-            .withRegion(System.getenv("AWS_REGION"))
+            .withRegion("us-east-1")
             .build();
         
 
@@ -57,7 +53,7 @@ public class DemoController {
         request.setServiceName("app3");
         
         DiscoverInstancesResult result=client.discoverInstances(request);
-        
+        //result.getInstances().get(0).getAttributes().
         //hostname = "http://566fa43a634c427aa3ad1998c4646028.app2.autosummary:49155/app2";  
 		//String app2_msg = rest.getForObject(uri, String.class);
         
