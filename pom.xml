@@ -34,10 +34,10 @@
         </dependency>
 
 		<dependency>
-			<groupId>dnsjava</groupId>
-			<artifactId>dnsjava</artifactId>
-			<version>2.1.6</version>
-		 </dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-servicediscovery</artifactId>
+			<version>1.11.534</version>
+		</dependency>
 
  </dependencies>
 
