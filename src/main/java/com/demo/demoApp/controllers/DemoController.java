@@ -1,7 +1,6 @@
 package com.demo.demoApp.controllers;
 
 import java.net.InetAddress;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 
@@ -12,23 +11,26 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import org.xbill.DNS.Lookup;
-import org.xbill.DNS.Record;
-import org.xbill.DNS.SRVRecord;
-import org.xbill.DNS.TextParseException;
-import org.xbill.DNS.Type;
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.EnvironmentVariableCredentialsProvider;
+import com.amazonaws.services.servicediscovery.AWSServiceDiscovery;
+import com.amazonaws.services.servicediscovery.AWSServiceDiscoveryClientBuilder;
+import com.amazonaws.services.servicediscovery.model.DiscoverInstancesRequest;
+import com.amazonaws.services.servicediscovery.model.DiscoverInstancesResult;
 
 @RestController
 public class DemoController {
 
-    @Autowired
-    private RestTemplate rest;
+    //@Autowired
+    //private RestTemplate rest;
 	
 	@GetMapping("/app1")
 	@ResponseStatus(value = HttpStatus.OK)
     public String index() throws URISyntaxException {
 		String message = "Hello From APP1 !!! ";
-        String hostname="";
+
 		try {
 			InetAddress ip = InetAddress.getLocalHost();
 			message += " From host: " + ip;
@@ -36,29 +38,31 @@ public class DemoController {
 			e.printStackTrace();
 		}
 		
+        AWSCredentials credentials =null;
         try {
-            Record[] records = new Lookup("app2.autoSummary", Type.SRV).run();
+            credentials= new EnvironmentVariableCredentialsProvider().getCredentials();
+        }catch (Exception e) {
+            throw new AmazonClientException("Cannot Load Credentials");
+        }
+        
+        AWSServiceDiscovery client = AWSServiceDiscoveryClientBuilder
+            .standard()
+            .withCredentials(new AWSStaticCredentialsProvider(credentials))
+            .withRegion(System.getenv("AWS_REGION"))
+            .build();
+        
 
-            for (Record record : records) {
-                 SRVRecord srv = (SRVRecord) record;
-
-            String target = srv.getTarget().toString().replaceFirst("\\.$", "");
-            int port = srv.getPort();
-
-            hostname = "http://" + target + ":" + port + "/app2";
-          }
-          } catch (TextParseException e) {
-             e.printStackTrace();
-          }
-
-        URI uri2 = new URI(hostname);  
-        URI uri = new URI("http://d84a6c0ba3684e4cad45dbdfeefd2355.app2.autosummary:49153/app2");
-
+        DiscoverInstancesRequest request = new DiscoverInstancesRequest();
+        request.setNamespaceName("autoSummary");
+        request.setServiceName("app3");
+        
+        DiscoverInstancesResult result=client.discoverInstances(request);
+        
         //hostname = "http://566fa43a634c427aa3ad1998c4646028.app2.autosummary:49155/app2";  
-		String app2_msg = rest.getForObject(uri, String.class);
-        //String app2_msg = "test";
+		//String app2_msg = rest.getForObject(uri, String.class);
+        
 
-        return message + "                                             >>>>     " + app2_msg + "   " + uri2;
+        return message + "                                             >>>>     " + result.toString();
     }
 
     @GetMapping("/")
