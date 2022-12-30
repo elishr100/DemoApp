@@ -37,20 +37,11 @@ public class DemoController {
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
-		
-        AWSCredentials credentials =null;
-        
-        try {
-            credentials= new EnvironmentVariableCredentialsProvider().getCredentials();
-        }catch (Exception e) {
-            throw new AmazonClientException("Cannot Load Credentials");
-        }
-        
-        
+	
+
         AWSServiceDiscovery client = AWSServiceDiscoveryClientBuilder
             .standard()
-            .withCredentials(new AWSStaticCredentialsProvider(credentials))
-            .withRegion(System.getenv("AWS_REGION"))
+            .withRegion(System.getenv("us-east-1"))
             .build();
         
 
