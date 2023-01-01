@@ -5,9 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.EC2ContainerCredentialsProviderWrapper;
 import com.amazonaws.services.servicediscovery.AWSServiceDiscovery;
 import com.amazonaws.services.servicediscovery.AWSServiceDiscoveryClientBuilder;
 
@@ -27,7 +24,6 @@ public class DemoApplication {
 
 	@Bean
 	public AWSServiceDiscovery awsServiceDiscovery() {
-		AWSCredentials credentials = new EC2ContainerCredentialsProviderWrapper().getCredentials();
         
 		return AWSServiceDiscoveryClientBuilder
 			.standard()
