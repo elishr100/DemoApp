@@ -42,10 +42,10 @@ public class DemoController {
         discoverInstancesRequest.setHealthStatus(HealthStatus.HEALTHY.name());
 
         DiscoverInstancesResult discoverInstancesResult = awsServiceDiscovery.discoverInstances(discoverInstancesRequest);
-        List<HttpInstanceSummary> allInstances = discoverInstancesResult.getInstances();
+        //List<HttpInstanceSummary> allInstances = discoverInstancesResult.getInstances();
         
-        HttpInstanceSummary result = allInstances.get(0);
-        String serviceLocation = result.getAttributes().get(AWS_INSTANCE_IPV_4_ATTRIBUTE) + ":" + result.getAttributes().get(AWS_INSTANCE_PORT_ATTRIBUTE);
+        //HttpInstanceSummary result = allInstances.get(0);
+        //String serviceLocation = result.getAttributes().get(AWS_INSTANCE_IPV_4_ATTRIBUTE) + ":" + result.getAttributes().get(AWS_INSTANCE_PORT_ATTRIBUTE);
 
 		try {
 			InetAddress ip = InetAddress.getLocalHost();
@@ -64,7 +64,7 @@ public class DemoController {
 		//String app2_msg = rest.getForObject(uri, String.class);
         
 
-        return message + "                                             >>>>     " + serviceLocation;
+        return message + "                                             >>>>     " ;
     }
 
     @GetMapping("/")
