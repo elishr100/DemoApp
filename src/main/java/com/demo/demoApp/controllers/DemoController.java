@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.auth.EnvironmentVariableCredentialsProvider;
 import com.amazonaws.services.servicediscovery.AWSServiceDiscovery;
 import com.amazonaws.services.servicediscovery.AWSServiceDiscoveryClientBuilder;
@@ -42,6 +43,7 @@ public class DemoController {
         AWSServiceDiscovery client = AWSServiceDiscoveryClientBuilder
             .standard()
             .withRegion(System.getenv("us-east-1"))
+            .withCredentials(null)
             .build();
         
 
