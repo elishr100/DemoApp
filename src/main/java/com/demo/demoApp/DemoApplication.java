@@ -26,7 +26,7 @@ public class DemoApplication {
     }
 
 	@Bean
-	public AWSServiceDiscovery resolve() {
+	public AWSServiceDiscovery awsServiceDiscovery() {
 		AWSCredentials credentials = new EC2ContainerCredentialsProviderWrapper().getCredentials();
         
 		return AWSServiceDiscoveryClientBuilder
