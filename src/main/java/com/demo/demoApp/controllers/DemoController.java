@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.EC2ContainerCredentialsProviderWrapper;
 import com.amazonaws.services.servicediscovery.AWSServiceDiscovery;
 import com.amazonaws.services.servicediscovery.AWSServiceDiscoveryClientBuilder;
@@ -33,13 +34,13 @@ public class DemoController {
 		}
 	
        
-        AWSCredentials cred = new EC2ContainerCredentialsProviderWrapper().getCredentials();
+        AWSCredentials credentials = new EC2ContainerCredentialsProviderWrapper().getCredentials();
         
-        // AWSServiceDiscovery client = AWSServiceDiscoveryClientBuilder
-        //     .standard()
-        //     .withRegion(System.getenv("us-east-1"))
-        //     .withCredentials(new EC2ContainerCredentialsProviderWrapper())
-        //     .build();
+        AWSServiceDiscovery client = AWSServiceDiscoveryClientBuilder
+            .standard()
+            .withRegion(System.getenv("us-east-1"))
+            .withCredentials(new AWSStaticCredentialsProvider(credentials))
+            .build();
         
 
         // DiscoverInstancesRequest request = new DiscoverInstancesRequest();
@@ -52,7 +53,7 @@ public class DemoController {
 		//String app2_msg = rest.getForObject(uri, String.class);
         
 
-        return message + "                                             >>>>     " + cred.getAWSAccessKeyId();
+        return message + "                                             >>>>     " + credentials.getAWSAccessKeyId();
     }
 
     @GetMapping("/")
