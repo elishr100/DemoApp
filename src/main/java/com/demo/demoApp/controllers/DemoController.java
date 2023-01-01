@@ -39,17 +39,17 @@ public class DemoController {
 		}
 	
 
-        AWSServiceDiscovery client = AWSServiceDiscoveryClientBuilder
-            .standard()
-            .withRegion(System.getenv("us-east-1"))
-            .build();
+        // AWSServiceDiscovery client = AWSServiceDiscoveryClientBuilder
+        //     .standard()
+        //     .withRegion(System.getenv("us-east-1"))
+        //     .build();
         
 
-        DiscoverInstancesRequest request = new DiscoverInstancesRequest();
-        request.setNamespaceName("autoSummary");
-        request.setServiceName("app3");
+        // DiscoverInstancesRequest request = new DiscoverInstancesRequest();
+        // request.setNamespaceName("autoSummary");
+        // request.setServiceName("app3");
         
-        DiscoverInstancesResult result=client.discoverInstances(request);
+        // DiscoverInstancesResult result=client.discoverInstances(request);
         
         //hostname = "http://566fa43a634c427aa3ad1998c4646028.app2.autosummary:49155/app2";  
 		//String app2_msg = rest.getForObject(uri, String.class);
