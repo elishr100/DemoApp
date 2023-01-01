@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.EC2ContainerCredentialsProviderWrapper;
 import com.amazonaws.services.servicediscovery.AWSServiceDiscovery;
 import com.amazonaws.services.servicediscovery.AWSServiceDiscoveryClientBuilder;
@@ -32,11 +33,13 @@ public class DemoController {
 		}
 	
        
-        AWSServiceDiscovery client = AWSServiceDiscoveryClientBuilder
-            .standard()
-            .withRegion(System.getenv("us-east-1"))
-            .withCredentials(new EC2ContainerCredentialsProviderWrapper())
-            .build();
+        AWSCredentials cred = new EC2ContainerCredentialsProviderWrapper().getCredentials();
+        
+        // AWSServiceDiscovery client = AWSServiceDiscoveryClientBuilder
+        //     .standard()
+        //     .withRegion(System.getenv("us-east-1"))
+        //     .withCredentials(new EC2ContainerCredentialsProviderWrapper())
+        //     .build();
         
 
         // DiscoverInstancesRequest request = new DiscoverInstancesRequest();
