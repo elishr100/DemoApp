@@ -24,13 +24,20 @@ public class DemoApplication {
 
 	@Bean
 	public AWSServiceDiscovery awsServiceDiscovery() {
-        
-		return AWSServiceDiscoveryClientBuilder
-			.standard()
-			.withRegion(System.getenv("us-east-1"))
-			.withCredentials(new AWSStaticCredentialsProvider(credentials))
-			.build();
+
+		return AWSServiceDiscoveryClientBuilder.defaultClient();
 	}
+
+	// @Bean
+	// public AWSServiceDiscovery awsServiceDiscovery() {
+	// 	//AWSCredentials credentials = new EC2ContainerCredentialsProviderWrapper().getCredentials();
+        
+	// 	return AWSServiceDiscoveryClientBuilder
+	// 		.standard()
+	// 		.withRegion(System.getenv("us-east-1"))
+	// 		//.withCredentials(new AWSStaticCredentialsProvider(credentials))
+	// 		.build();
+	// }
 	
 
 }
