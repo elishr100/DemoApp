@@ -4,6 +4,7 @@ import java.net.InetAddress;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -18,7 +19,8 @@ import com.amazonaws.services.servicediscovery.AWSServiceDiscoveryClientBuilder;
 @RestController
 public class DemoController {
 
-    //@Autowired
+    @Autowired
+    private AWSServiceDiscovery client;
     //private RestTemplate rest;
 	
 	@GetMapping("/app1")
@@ -32,17 +34,7 @@ public class DemoController {
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
-	
-       
-        AWSCredentials credentials = new EC2ContainerCredentialsProviderWrapper().getCredentials();
-        
-        AWSServiceDiscovery client = AWSServiceDiscoveryClientBuilder
-            .standard()
-            .withRegion(System.getenv("us-east-1"))
-            .withCredentials(new AWSStaticCredentialsProvider(credentials))
-            .build();
-        
-
+	     
         // DiscoverInstancesRequest request = new DiscoverInstancesRequest();
         // request.setNamespaceName("autoSummary");
         // request.setServiceName("app3");
@@ -53,7 +45,7 @@ public class DemoController {
 		//String app2_msg = rest.getForObject(uri, String.class);
         
 
-        return message + "                                             >>>>     " + credentials.getAWSAccessKeyId();
+        return message + "                                             >>>>     " ;
     }
 
     @GetMapping("/")
