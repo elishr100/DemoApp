@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.amazonaws.services.servicediscovery.AWSServiceDiscovery;
+import com.amazonaws.services.servicediscovery.AWSServiceDiscoveryClientBuilder;
 
 @RestController
 public class DemoController {
@@ -23,6 +24,7 @@ public class DemoController {
 	@ResponseStatus(value = HttpStatus.OK)
     public String index() throws URISyntaxException {
 		String message = "Hello From APP1 !!! ";
+        final AWSServiceDiscovery awsServiceDiscovery = AWSServiceDiscoveryClientBuilder.defaultClient();
 
 		try {
 			InetAddress ip = InetAddress.getLocalHost();
