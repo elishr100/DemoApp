@@ -4,22 +4,17 @@ import java.net.InetAddress;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
-import com.amazonaws.auth.EnvironmentVariableCredentialsProvider;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.servicediscovery.AWSServiceDiscovery;
 import com.amazonaws.services.servicediscovery.AWSServiceDiscoveryClientBuilder;
-import com.amazonaws.services.servicediscovery.model.DiscoverInstancesRequest;
-import com.amazonaws.services.servicediscovery.model.DiscoverInstancesResult;
 
 @RestController
 public class DemoController {
@@ -39,11 +34,20 @@ public class DemoController {
 			e.printStackTrace();
 		}
 	
-
-        AWSServiceDiscovery client = AWSServiceDiscoveryClientBuilder
-            .standard()
-            .withRegion(System.getenv("us-east-1"))
-            .build();
+        AWSCredentials credentials = null;
+        try
+        {
+            credentials = new ProfileCredentialsProvider().getCredentials();
+        }catch(Exception e)
+        {
+            throw new AmazonClientException("Cannot Load credentials");
+        }
+        
+        // AWSServiceDiscovery client = AWSServiceDiscoveryClientBuilder
+        //     .standard()
+        //     .withCredentials(new AWSStaticCredentialsProvider(credentials))
+        //     .withRegion(System.getenv("us-east-1"))
+        //     .build();
         
 
         // DiscoverInstancesRequest request = new DiscoverInstancesRequest();
@@ -56,7 +60,7 @@ public class DemoController {
 		//String app2_msg = rest.getForObject(uri, String.class);
         
 
-        return message + "                                             >>>>     ";
+        return message + "                                             >>>>     " + credentials.getAWSAccessKeyId();
     }
 
     @GetMapping("/")
