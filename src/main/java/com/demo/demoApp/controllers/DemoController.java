@@ -39,10 +39,10 @@ public class DemoController {
 		}
 	
 
-        // AWSServiceDiscovery client = AWSServiceDiscoveryClientBuilder
-        //     .standard()
-        //     .withRegion(System.getenv("us-east-1"))
-        //     .build();
+        AWSServiceDiscovery client = AWSServiceDiscoveryClientBuilder
+            .standard()
+            .withRegion(System.getenv("us-east-1"))
+            .build();
         
 
         // DiscoverInstancesRequest request = new DiscoverInstancesRequest();
