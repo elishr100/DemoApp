@@ -5,9 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
-import com.amazonaws.services.servicediscovery.AWSServiceDiscovery;
-import com.amazonaws.services.servicediscovery.AWSServiceDiscoveryClientBuilder;
-
 @SpringBootApplication
 public class DemoApplication {
 
@@ -22,11 +19,11 @@ public class DemoApplication {
 
     }
 
-	@Bean
-	public AWSServiceDiscovery awsServiceDiscovery() {
+	// @Bean
+	// public AWSServiceDiscovery awsServiceDiscovery() {
 
-		return AWSServiceDiscoveryClientBuilder.defaultClient();
-	}
+	// 	return AWSServiceDiscoveryClientBuilder.defaultClient();
+	// }
 
 	// @Bean
 	// public AWSServiceDiscovery awsServiceDiscovery() {
