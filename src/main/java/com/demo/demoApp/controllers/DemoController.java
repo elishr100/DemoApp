@@ -9,10 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.amazonaws.AmazonClientException;
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.auth.EC2ContainerCredentialsProviderWrapper;
 import com.amazonaws.services.servicediscovery.AWSServiceDiscovery;
 import com.amazonaws.services.servicediscovery.AWSServiceDiscoveryClientBuilder;
 
@@ -34,20 +31,12 @@ public class DemoController {
 			e.printStackTrace();
 		}
 	
-        AWSCredentials credentials = null;
-        try
-        {
-            credentials = new ProfileCredentialsProvider().getCredentials();
-        }catch(Exception e)
-        {
-            throw new AmazonClientException("Cannot Load credentials");
-        }
-        
-        // AWSServiceDiscovery client = AWSServiceDiscoveryClientBuilder
-        //     .standard()
-        //     .withCredentials(new AWSStaticCredentialsProvider(credentials))
-        //     .withRegion(System.getenv("us-east-1"))
-        //     .build();
+       
+        AWSServiceDiscovery client = AWSServiceDiscoveryClientBuilder
+            .standard()
+            .withRegion(System.getenv("us-east-1"))
+            .withCredentials(new EC2ContainerCredentialsProviderWrapper())
+            .build();
         
 
         // DiscoverInstancesRequest request = new DiscoverInstancesRequest();
