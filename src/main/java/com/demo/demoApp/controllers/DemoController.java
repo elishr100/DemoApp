@@ -34,14 +34,14 @@ public class DemoController {
 			e.printStackTrace();
 		}
 	
-        // AWSCredentials credentials = null;
-        // try
-        // {
-        //     credentials = new ProfileCredentialsProvider().getCredentials();
-        // }catch(Exception e)
-        // {
-        //     throw new AmazonClientException("Cannot Load credentials");
-        // }
+        AWSCredentials credentials = null;
+        try
+        {
+            credentials = new ProfileCredentialsProvider().getCredentials();
+        }catch(Exception e)
+        {
+            throw new AmazonClientException("Cannot Load credentials");
+        }
         
         // AWSServiceDiscovery client = AWSServiceDiscoveryClientBuilder
         //     .standard()
