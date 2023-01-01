@@ -41,7 +41,7 @@ public class DemoController {
         discoverInstancesRequest.setServiceName("app3");
         discoverInstancesRequest.setHealthStatus(HealthStatus.HEALTHY.name());
 
-        DiscoverInstancesResult discoverInstancesResult = awsServiceDiscovery.discoverInstances(discoverInstancesRequest);
+        //DiscoverInstancesResult discoverInstancesResult = awsServiceDiscovery.discoverInstances(discoverInstancesRequest);
         //List<HttpInstanceSummary> allInstances = discoverInstancesResult.getInstances();
         
         //HttpInstanceSummary result = allInstances.get(0);
