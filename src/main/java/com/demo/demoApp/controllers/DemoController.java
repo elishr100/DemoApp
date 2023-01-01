@@ -43,7 +43,6 @@ public class DemoController {
         AWSServiceDiscovery client = AWSServiceDiscoveryClientBuilder
             .standard()
             .withRegion(System.getenv("us-east-1"))
-            .withCredentials(null)
             .build();
         
 
