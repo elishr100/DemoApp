@@ -52,7 +52,7 @@ public class DemoController {
 		//String app2_msg = rest.getForObject(uri, String.class);
         
 
-        return message + "                                             >>>>     " ;
+        return message + "                                             >>>>     " + cred.getAWSAccessKeyId();
     }
 
     @GetMapping("/")
