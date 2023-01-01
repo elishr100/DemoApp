@@ -15,8 +15,8 @@ import com.amazonaws.services.servicediscovery.AWSServiceDiscovery;
 @RestController
 public class DemoController {
 
-    @Autowired
-    private AWSServiceDiscovery client;
+    // @Autowired
+    // private AWSServiceDiscovery client;
     //private RestTemplate rest;
 	
 	@GetMapping("/app1")
