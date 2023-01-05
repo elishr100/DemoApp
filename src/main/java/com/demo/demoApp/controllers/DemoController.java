@@ -41,7 +41,7 @@ public class DemoController {
         final AWSServiceDiscovery awsServiceDiscovery = AWSServiceDiscoveryClientBuilder.defaultClient();
         final DiscoverInstancesRequest discoverInstancesRequest = new DiscoverInstancesRequest();
 
-        discoverInstancesRequest.setNamespaceName("autoSummary");
+        discoverInstancesRequest.setNamespaceName("autoSummary2");
         discoverInstancesRequest.setServiceName("app3");
         discoverInstancesRequest.setHealthStatus(HealthStatus.HEALTHY.name());
 
