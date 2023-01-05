@@ -16,6 +16,19 @@
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+	
+	<dependencyManagement>
+		<dependencies>
+		  <dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-bom</artifactId>
+			<version>1.12.378</version>
+			<type>pom</type>
+			<scope>import</scope>
+		  </dependency>
+		</dependencies>
+	  </dependencyManagement>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -36,7 +49,6 @@
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk-servicediscovery</artifactId>
-			<version>1.12.263</version>
 		</dependency>
 
  </dependencies>

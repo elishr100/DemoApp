@@ -48,14 +48,17 @@ public class DemoController {
         try {
         DiscoverInstancesResult discoverInstancesResult = awsServiceDiscovery.discoverInstances(discoverInstancesRequest);
         }
-        catch(ServiceNotFoundException ee){
-                err = "ServiceNotFoundException";
+        catch(ServiceNotFoundException e){
+                err = e.getMessage();
         }
-        catch(NamespaceNotFoundException ee){
-            err = "NamespaceNotFoundException";
+        catch(NamespaceNotFoundException e){
+            err = e.getMessage();
         }
-        catch(InvalidInputException ee){
-            err = "InvalidInputException";
+        catch(InvalidInputException e){
+            err = e.getMessage();
+        }
+        catch(Throwable e){
+            err = "other error Exception";
         }
  
         //List<HttpInstanceSummary> allInstances = discoverInstancesResult.getInstances();
