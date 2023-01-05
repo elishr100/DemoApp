@@ -1,71 +1,32 @@
 package com.demo.demoApp.controllers;
 
 import java.net.InetAddress;
-import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.amazonaws.services.servicediscovery.AWSServiceDiscovery;
-import com.amazonaws.services.servicediscovery.AWSServiceDiscoveryClientBuilder;
-import com.amazonaws.services.servicediscovery.model.DiscoverInstancesRequest;
-import com.amazonaws.services.servicediscovery.model.DiscoverInstancesResult;
-import com.amazonaws.services.servicediscovery.model.HealthStatus;
-import com.amazonaws.services.servicediscovery.model.HttpInstanceSummary;
-import com.amazonaws.services.servicediscovery.model.InvalidInputException;
-import com.amazonaws.services.servicediscovery.model.NamespaceNotFoundException;
-import com.amazonaws.services.servicediscovery.model.ServiceNotFoundException;
-
+import com.demo.demoApp.discovery.common.service.ServiceDiscoveryServiceImpl;
+import com.demo.demoApp.discovery.common.util.ServiceDiscoveryConstants;
 
 @RestController
 public class DemoController {
 
-    private static final String AWS_INSTANCE_IPV_4_ATTRIBUTE = "AWS_INSTANCE_IPV4";
-    private static final String AWS_INSTANCE_PORT_ATTRIBUTE = "AWS_INSTANCE_PORT";
-    
-    // @Autowired
-    // private AWSServiceDiscovery client;
+    @Autowired
+    private ServiceDiscoveryServiceImpl serviceDiscoveryService;
     //private RestTemplate rest;
 	
 	@GetMapping("/app1")
 	@ResponseStatus(value = HttpStatus.OK)
-    public String index() throws URISyntaxException {
+    public String index() {
 
 
 		String message = "Hello From APP1 !!! ";
-        String err = "no error";
-        final AWSServiceDiscovery awsServiceDiscovery = AWSServiceDiscoveryClientBuilder.defaultClient();
-        final DiscoverInstancesRequest discoverInstancesRequest = new DiscoverInstancesRequest();
-
-        discoverInstancesRequest.setNamespaceName("autoSummary");
-        discoverInstancesRequest.setServiceName("app3");
-        discoverInstancesRequest.setHealthStatus(HealthStatus.HEALTHY.name());
-
-        // try {
-        // DiscoverInstancesResult discoverInstancesResult = awsServiceDiscovery.discoverInstances(discoverInstancesRequest);
-        // }
-        // catch(ServiceNotFoundException e){
-        //         err = e.getMessage();
-        // }
-        // catch(NamespaceNotFoundException e){
-        //     err = e.getMessage();
-        // }
-        // catch(InvalidInputException e){
-        //     err = e.getMessage();
-        // }
-        // catch(Throwable e){
-        //     err = "other error Exception";
-        // }
  
-        //List<HttpInstanceSummary> allInstances = discoverInstancesResult.getInstances();
-        
-        //HttpInstanceSummary result = allInstances.get(0);
-        //String serviceLocation = result.getAttributes().get(AWS_INSTANCE_IPV_4_ATTRIBUTE) + ":" + result.getAttributes().get(AWS_INSTANCE_PORT_ATTRIBUTE);
-
 		try {
 			InetAddress ip = InetAddress.getLocalHost();
 			message += " From host: " + ip;
@@ -73,17 +34,11 @@ public class DemoController {
 			e.printStackTrace();
 		}
 	     
-        // DiscoverInstancesRequest request = new DiscoverInstancesRequest();
-        // request.setNamespaceName("autoSummary");
-        // request.setServiceName("app3");
-        
-        // DiscoverInstancesResult result=client.discoverInstances(request);
-        
-        //hostname = "http://566fa43a634c427aa3ad1998c4646028.app2.autosummary:49155/app2";  
+        String hostIp = serviceDiscoveryService.getServiceLocationResolver().resolve(ServiceDiscoveryConstants.SERVICE_B);
 		//String app2_msg = rest.getForObject(uri, String.class);
         
 
-        return message + "                                             >>>>     " + err ;
+        return message + "                                             >>>>     " +  hostIp;
     }
 
     @GetMapping("/")
