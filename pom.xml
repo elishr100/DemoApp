@@ -36,7 +36,7 @@
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk-servicediscovery</artifactId>
-			<version>1.11.534</version>
+			<version>1.12.263</version>
 		</dependency>
 
  </dependencies>

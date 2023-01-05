@@ -41,7 +41,7 @@ public class DemoController {
         final AWSServiceDiscovery awsServiceDiscovery = AWSServiceDiscoveryClientBuilder.defaultClient();
         final DiscoverInstancesRequest discoverInstancesRequest = new DiscoverInstancesRequest();
 
-        discoverInstancesRequest.setNamespaceName("autoSummary2");
+        discoverInstancesRequest.setNamespaceName("autoSummary");
         discoverInstancesRequest.setServiceName("app3");
         discoverInstancesRequest.setHealthStatus(HealthStatus.HEALTHY.name());
 
@@ -57,9 +57,7 @@ public class DemoController {
         catch(InvalidInputException ee){
             err = "InvalidInputException";
         }
-        catch(Exception ee){
-            err = "other error was found";
-        }   
+ 
         //List<HttpInstanceSummary> allInstances = discoverInstancesResult.getInstances();
         
         //HttpInstanceSummary result = allInstances.get(0);
