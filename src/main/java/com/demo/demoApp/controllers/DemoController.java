@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.EC2ContainerCredentialsProviderWrapper;
 import com.amazonaws.services.servicediscovery.AWSServiceDiscovery;
 import com.amazonaws.services.servicediscovery.AWSServiceDiscoveryClientBuilder;
 import com.amazonaws.services.servicediscovery.model.DiscoverInstancesRequest;
@@ -37,13 +34,7 @@ public class DemoController {
 
 
 		String message = "Hello From APP1 !!! ";
-        
-        AWSCredentials credentials = new EC2ContainerCredentialsProviderWrapper().getCredentials();
-        final AWSServiceDiscovery awsServiceDiscovery = AWSServiceDiscoveryClientBuilder
-                                .standard()
-                                .withRegion(System.getenv("us-east-1a"))
-                                .withCredentials(new AWSStaticCredentialsProvider(credentials))
-                                .build();
+        final AWSServiceDiscovery awsServiceDiscovery = AWSServiceDiscoveryClientBuilder.defaultClient();
         final DiscoverInstancesRequest discoverInstancesRequest = new DiscoverInstancesRequest();
 
         discoverInstancesRequest.setNamespaceName("autoSummary");
@@ -53,7 +44,7 @@ public class DemoController {
         try {
         DiscoverInstancesResult discoverInstancesResult = awsServiceDiscovery.discoverInstances(discoverInstancesRequest);
         }
-        catch(Exception ee) {
+        catch(Exception ee){
 
         }
         //List<HttpInstanceSummary> allInstances = discoverInstancesResult.getInstances();
