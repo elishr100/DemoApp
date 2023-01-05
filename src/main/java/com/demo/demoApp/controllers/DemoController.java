@@ -16,6 +16,9 @@ import com.amazonaws.services.servicediscovery.model.DiscoverInstancesRequest;
 import com.amazonaws.services.servicediscovery.model.DiscoverInstancesResult;
 import com.amazonaws.services.servicediscovery.model.HealthStatus;
 import com.amazonaws.services.servicediscovery.model.HttpInstanceSummary;
+import com.amazonaws.services.servicediscovery.model.InvalidInputException;
+import com.amazonaws.services.servicediscovery.model.NamespaceNotFoundException;
+import com.amazonaws.services.servicediscovery.model.ServiceNotFoundException;
 
 
 @RestController
@@ -34,6 +37,7 @@ public class DemoController {
 
 
 		String message = "Hello From APP1 !!! ";
+        String err = "no error";
         final AWSServiceDiscovery awsServiceDiscovery = AWSServiceDiscoveryClientBuilder.defaultClient();
         final DiscoverInstancesRequest discoverInstancesRequest = new DiscoverInstancesRequest();
 
@@ -44,9 +48,18 @@ public class DemoController {
         try {
         DiscoverInstancesResult discoverInstancesResult = awsServiceDiscovery.discoverInstances(discoverInstancesRequest);
         }
-        catch(Exception ee){
-
+        catch(ServiceNotFoundException ee){
+                err = "ServiceNotFoundException";
         }
+        catch(NamespaceNotFoundException ee){
+            err = "NamespaceNotFoundException";
+        }
+        catch(InvalidInputException ee){
+            err = "InvalidInputException";
+        }
+        catch(Exception ee){
+            err = "other error was found";
+        }   
         //List<HttpInstanceSummary> allInstances = discoverInstancesResult.getInstances();
         
         //HttpInstanceSummary result = allInstances.get(0);
@@ -69,7 +82,7 @@ public class DemoController {
 		//String app2_msg = rest.getForObject(uri, String.class);
         
 
-        return message + "                                             >>>>     " ;
+        return message + "                                             >>>>     " + err ;
     }
 
     @GetMapping("/")
