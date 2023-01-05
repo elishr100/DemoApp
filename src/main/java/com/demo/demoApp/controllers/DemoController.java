@@ -45,21 +45,21 @@ public class DemoController {
         discoverInstancesRequest.setServiceName("app3");
         discoverInstancesRequest.setHealthStatus(HealthStatus.HEALTHY.name());
 
-        try {
-        DiscoverInstancesResult discoverInstancesResult = awsServiceDiscovery.discoverInstances(discoverInstancesRequest);
-        }
-        catch(ServiceNotFoundException e){
-                err = e.getMessage();
-        }
-        catch(NamespaceNotFoundException e){
-            err = e.getMessage();
-        }
-        catch(InvalidInputException e){
-            err = e.getMessage();
-        }
-        catch(Throwable e){
-            err = "other error Exception";
-        }
+        // try {
+        // DiscoverInstancesResult discoverInstancesResult = awsServiceDiscovery.discoverInstances(discoverInstancesRequest);
+        // }
+        // catch(ServiceNotFoundException e){
+        //         err = e.getMessage();
+        // }
+        // catch(NamespaceNotFoundException e){
+        //     err = e.getMessage();
+        // }
+        // catch(InvalidInputException e){
+        //     err = e.getMessage();
+        // }
+        // catch(Throwable e){
+        //     err = "other error Exception";
+        // }
  
         //List<HttpInstanceSummary> allInstances = discoverInstancesResult.getInstances();
         
