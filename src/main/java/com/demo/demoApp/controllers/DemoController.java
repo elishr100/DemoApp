@@ -36,10 +36,10 @@ public class DemoController {
 		}
 	     
         //String hostIp = serviceDiscoveryService.getServiceLocationResolver().resolve(ServiceDiscoveryConstants.SERVICE_B);
-		//String app2_msg = rest.getForObject("http://app2.autosummary", String.class);
+		String app2_msg = rest.getForObject("http://app2.autosummary:8080/", String.class);
         
 
-        return message + "                                             >>>>     " ;
+        return message + "                                             >>>>     " +  app2_msg;
     }
 
     @GetMapping("/")
