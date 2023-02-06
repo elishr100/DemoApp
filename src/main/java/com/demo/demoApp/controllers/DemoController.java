@@ -39,7 +39,7 @@ public class DemoController {
 		String app2_msg = rest.getForObject("http://app2.autosummary:8080/", String.class);
         
 
-        return message + "                                             >>>>     " +  app2_msg;
+        return message + ">>>>>> " +  app2_msg + " <<<<<<<";
     }
 
     @GetMapping("/")
