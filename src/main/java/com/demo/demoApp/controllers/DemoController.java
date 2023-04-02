@@ -45,7 +45,7 @@ public class DemoController {
     @GetMapping("/")
 	@ResponseStatus(value = HttpStatus.OK)
     public String index2() {
-		String message = "Hello From APP1 !!! ";
+		String message = "Hello From root APP1 !!! ";
 		try {
 			InetAddress ip = InetAddress.getLocalHost();
 			message += " From host: " + ip;
