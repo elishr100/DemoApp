@@ -16,7 +16,7 @@ class DemoApplicationTests {
 	
 	@Test
 	void testString() {
-		String message = "Hello From APP1 !!! ";
+		String message = "Hello From root APP1 !!! ";
 		try {
 			InetAddress ip = InetAddress.getLocalHost();
 			message += " From host: " + ip;
