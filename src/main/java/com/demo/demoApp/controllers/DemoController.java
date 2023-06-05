@@ -36,7 +36,7 @@ public class DemoController {
 		// }
 	     
         //String hostIp = serviceDiscoveryService.getServiceLocationResolver().resolve(ServiceDiscoveryConstants.SERVICE_B);
-		String app2_msg = rest.getForObject("http://app5.autosummary:8080/app2", String.class);
+		String app2_msg = rest.getForObject("http://app5.autosummary:8080/", String.class);
         
 
         return message + ">>>>>> " +  app2_msg + " <<<<<<<";
