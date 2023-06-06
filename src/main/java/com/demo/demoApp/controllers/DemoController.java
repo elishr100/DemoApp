@@ -28,12 +28,12 @@ public class DemoController {
 
 		String message = "Hello From APP1 !!! ";
  
-		// try {
-		// 	InetAddress ip = InetAddress.getLocalHost();
-		// 	message += " From host: " + ip;
-		// } catch (UnknownHostException e) {
-		// 	e.printStackTrace();
-		// }
+		try {
+			InetAddress ip = InetAddress.getLocalHost();
+			message += " From host: " + ip;
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
 	     
         //String hostIp = serviceDiscoveryService.getServiceLocationResolver().resolve(ServiceDiscoveryConstants.SERVICE_B);
 		String app2_msg = rest.getForObject("http://app5.autosummary:8080/", String.class);
