@@ -57,7 +57,7 @@ public class DemoController {
     }
 
 	private String performRetryRequest() {
-		int maxRetries = 3;
+		int maxRetries = 2;
 		int retries = 0;
 		String app2_msg = null;
 	
